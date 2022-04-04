@@ -9,10 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText mMessageEditText;
-    private TextView replyMessage, replyLabel;
+    String paragraphOne, paragraphTwo, paragraphThree;
 
     private static final String LOG_TAG =MainActivity.class.getSimpleName();
     public static final String EXTRA_MESSAGE ="com.example.android.twoactivities.extra.MESSAGE";
@@ -24,33 +23,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mMessageEditText = findViewById(R.id.editText_main);
-        replyMessage = findViewById(R.id.reply_message);
-        replyLabel = findViewById(R.id.reply_label);
-
+        paragraphOne = getString(R.string.text_message_1);
+        paragraphTwo = getString(R.string.text_message_2);
+        paragraphThree = getString(R.string.text_message_3);
     }
+
 
     @Override
-    public void onActivityResult(int requestCode,
-                                 int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == TEXT_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                String reply =
-                        data.getStringExtra(SecondActivity.EXTRA_REPLY);
-                replyMessage.setVisibility(View.VISIBLE);
-                replyMessage.setText(reply);
-                replyLabel.setVisibility(View.VISIBLE);
-            }
+    public void onClick(View view) {
+        int id = view.getId();
+        Log.d("Hello t",id+" ");
+
+        if(id==R.id.button1){
+            Intent i = new Intent(this, SecondActivity.class);
+            i.putExtra("Paragraph", paragraphOne);
+            startActivity(i);
         }
-    }
 
-    public void launchSecondActivity(View view) {
-        Intent intent = new Intent(this, SecondActivity.class);
-        String message = mMessageEditText.getText().toString();
+        if(id==R.id.button2){
+            Intent i = new Intent(this, SecondActivity.class);
+            i.putExtra("Paragraph", paragraphTwo);
+            startActivity(i);
+        }
 
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivityForResult(intent, TEXT_REQUEST);
-
+        if(id==R.id.button3){
+            Intent i = new Intent(this, SecondActivity.class);
+            i.putExtra("Paragraph", paragraphThree);
+            startActivity(i);
+        }
     }
 }
