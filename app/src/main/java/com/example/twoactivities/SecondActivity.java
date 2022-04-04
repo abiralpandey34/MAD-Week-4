@@ -9,28 +9,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class SecondActivity extends AppCompatActivity {
-    public static final String EXTRA_REPLY ="com.example.android.twoactivities.extra.REPLY";
-    private EditText mReply;
+    TextView countText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
+        countText = findViewById(R.id.count_text_view);
+
+        // get the count sent through intent from the first activity
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        String currentCount = intent.getStringExtra(MainActivity.EXTRA_COUNT);
 
-        TextView messageView = findViewById(R.id.textView);
-        mReply = findViewById(R.id.editText_second);
-        messageView.setText(message);
-
-    }
-
-    public void replyBack(View view) {
-        String reply = mReply.getText().toString();
-        Intent replyIntent = new Intent();
-        replyIntent.putExtra(EXTRA_REPLY, reply);
-        setResult(RESULT_OK, replyIntent);
-        finish();
+        countText.setText(currentCount);
     }
 }

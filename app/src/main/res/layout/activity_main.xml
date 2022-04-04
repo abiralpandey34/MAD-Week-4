@@ -6,51 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="launchSecondActivity"
-        android:text="@string/button_main"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/editText_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="16dp"
-
-        android:ems="10"
-        android:inputType="textLongMessage"
-        android:hint="Enter Your Message Here"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
-        android:id="@+id/reply_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reply Received"
+        android:id="@+id/count_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#3F51B5"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="96sp"
         android:textStyle="bold"
-        android:layout_marginStart="16dp"
-        android:visibility="invisible"
-        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/count_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hello_btn" />
+
+    <Button
+        android:id="@+id/hello_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#3F51B5"
+        android:text="SAY HELLO"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/reply_message"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/count_btn"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text=""
-        android:visibility="invisible"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reply_label" />
+        android:backgroundTint="#3F51B5"
+        android:text="COUNT"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

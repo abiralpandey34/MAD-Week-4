@@ -6,17 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText mMessageEditText;
-    private TextView replyMessage, replyLabel;
-
-    private static final String LOG_TAG =MainActivity.class.getSimpleName();
-    public static final String EXTRA_MESSAGE ="com.example.android.twoactivities.extra.MESSAGE";
-    public static final int TEXT_REQUEST = 1;
+    private int currentCount = 0;
+    TextView numberText;
+    Button toastButton, countButton;
+    final static String EXTRA_COUNT = "com.example.android.MainActivity";
 
 
     @Override
@@ -24,33 +23,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mMessageEditText = findViewById(R.id.editText_main);
-        replyMessage = findViewById(R.id.reply_message);
-        replyLabel = findViewById(R.id.reply_label);
+        countButton = findViewById(R.id.count_btn);
+        toastButton = findViewById(R.id.hello_btn);
+        numberText = findViewById(R.id.count_text);
+
+        countButton.setOnClickListener(this);
+        toastButton.setOnClickListener(this);
 
     }
 
     @Override
-    public void onActivityResult(int requestCode,
-                                 int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == TEXT_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                String reply =
-                        data.getStringExtra(SecondActivity.EXTRA_REPLY);
-                replyMessage.setVisibility(View.VISIBLE);
-                replyMessage.setText(reply);
-                replyLabel.setVisibility(View.VISIBLE);
-            }
+    public void onClick(View view) {
+        if(view.getId()==R.id.count_btn){
+            countUp(view);
+        }else if(view.getId()==R.id.hello_btn){
+            launchSecondActivity();
         }
     }
 
-    public void launchSecondActivity(View view) {
+    public void launchSecondActivity(){
         Intent intent = new Intent(this, SecondActivity.class);
-        String message = mMessageEditText.getText().toString();
+        intent.putExtra(EXTRA_COUNT, this.currentCount+"");
+        startActivity(intent);
+    }
 
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivityForResult(intent, TEXT_REQUEST);
-
+    public void countUp(View view){
+        currentCount++;
+        numberText.setText(currentCount+"");
     }
 }
