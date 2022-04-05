@@ -40,16 +40,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(i);
         }
 
-        if(id==R.id.button2){
+        else if(id==R.id.button2){
             Intent i = new Intent(this, SecondActivity.class);
             i.putExtra("Paragraph", paragraphTwo);
             startActivity(i);
         }
 
-        if(id==R.id.button3){
+        else if(id==R.id.button3){
             Intent i = new Intent(this, SecondActivity.class);
             i.putExtra("Paragraph", paragraphThree);
             startActivity(i);
+        }
+        else{
+            try {
+                throw new Exception("Invalid Option");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
